@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<%# <%= render @questionnaire %>
+
+<%= form_for(@QuizResponse, url: quiz_response_index_path)  do |f| %>
+
+
+<h1><%= @questionnaire.name %></h1>
+    <%= f.text_field :name%>
+    <%# <%= hidden_field_tag :name, @questionnaire.name %> 
+
+    <%= hidden_field_tag :questionnaire_id, @questionnaire.id %>
+
+<% @questionnaire.questions.each do |question| %>
+  <h3><%= question.name %></h3>
+
+    <% question.answers.each do |answer| %>
+      <p>
+        <%= radio_button_tag question.id, answer.id %>
+        <%= answer.name %>
+      </p>
+  <%end%>
+<% end %>
+
+  <!-- submit -->
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %> 
+
+
+--------------------------------------------------
+
+
+
+
+
+
+<div>
+  <%= link_to "Edit this questionnaire", edit_questionnaire_path(@questionnaire) %> |
+  <%= link_to "Back to questionnaires", questionnaires_path %>
+</div>
